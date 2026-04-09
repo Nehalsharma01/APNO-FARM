@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aapno Farm | The Gold Standard of Purity</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Formal, highly visible, elegant fonts (Lora & Lato) */
+        @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap');
+        
+        body { 
+            font-family: 'Lato', sans-serif; 
+            background-color: #fafaf9; /* Stone-50, Warm cream */
+            color: #292524;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        h1, h2, h3, h4, .brand-font { 
+            font-family: 'Lora', serif; 
+        }
+
+        /* Nav styles */
+        .glass-nav {
+            background: rgba(250, 250, 249, 0.98);
+            border-bottom: 1px solid #d6d3d1; /* stone-300 */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            transition: all 0.3s ease;
+        }
+
+        /* Ambient colored blobs (Deep greens and warm golds for elegance) */
+        .blob {
+            position:absolute; z-index:-1; opacity:0.12;
+            animation: float 14s infinite ease-in-out alternate;
+            border-radius: 50%;
+            filter: blur(90px);
+        }
+        .blob-1 { background: #059669; width: 450px; height: 450px; top: 10%; left: -5%; } /* Emerald */
+        .blob-2 { background: #d97706; width: 350px; height: 350px; top: 40%; right: -5%; animation-delay: -3s; } /* Amber Gold */
+        .blob-3 { background: #0f766e; width: 500px; height: 500px; bottom: 5%; left: 15%; animation-delay: -6s; } /* Teal */
+        .blob-4 { background: #84cc16; width: 300px; height: 300px; top: -5%; right: 25%; animation-delay: -9s; } /* Olive */
+
+        @keyframes float {
+            0% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-20px) scale(1.05); }
+            100% { transform: translateY(15px) scale(0.95); }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f5f5f4; }
+        ::-webkit-scrollbar-thumb { background: #15803d; border-radius: 4px; }
+
+        .elegant-card {
+            background: #ffffff;
+            border: 1px solid #e7e5e4;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+            border-radius: 2px;
+            transition: all 0.4s ease;
+        }
+
+        .hero-bg {
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-video {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 100vw; height: 100vh;
+            object-fit: cover;
+            transform: translate(-50%, -50%);
+            z-index: -2;
+        }
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(6, 78, 59, 0.45) 0%, rgba(2, 44, 34, 0.9) 100%);
+            z-index: -1;
+        }
+
+        /* Gallery Features */
+        .masonry-gallery {
+            column-count: 3;
+            column-gap: 1.5rem;
+        }
+        @media (max-width: 1024px) { .masonry-gallery { column-count: 2; } }
+        @media (max-width: 640px) { .masonry-gallery { column-count: 1; } }
+        
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 1.5rem;
+            display: block;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            border-radius: 2px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .masonry-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            z-index: 10;
+        }
+        .masonry-item img, .masonry-item video {
+            width: 100%; 
+            height: auto; 
+            display: block;
+        }
+        
+        .filter-btn.active {
+            background-color: #064e3b; /* Deep Emerald */
+            color: #ffffff;
+            border-color: #064e3b;
+        }
+        .filter-btn {
+            background-color: transparent;
+            color: #57534e; /* stone-600 */
+            border: 1px solid #d6d3d1; /* stone-300 */
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-weight: 700;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            padding: 0.8rem 2.5rem;
+            border-radius: 2px;
+        }
+        .filter-btn:hover {
+            border-color: #064e3b;
+            color: #064e3b;
+        }
+
+        /* Gradient buttons (Formal, elegant gradients) */
+        .btn-gradient {
+            background: linear-gradient(to right, #064e3b, #047857);
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            transition: all 0.3s;
+            font-size: 0.85rem;
+            border-radius: 2px;
+            padding: 1rem 2.5rem;
+            font-weight: 700;
+            display: inline-block;
+            border: 1px solid #064e3b;
+        }
+        .btn-gradient:hover { background: #022c22; border-color: #022c22; }
+
+        .btn-outline-glow {
+            background-color: transparent;
+            color: #ffffff;
+            border: 1px solid #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            transition: all 0.3s;
+            font-size: 0.85rem;
+            border-radius: 2px;
+            padding: 1rem 2.5rem;
+            font-weight: 700;
+            display: inline-block;
+        }
+        .btn-outline-glow:hover { background-color: #ffffff; color: #064e3b; }
+        
+        /* Specialized Gradient Overlays (Elegant greens, golds, slate) */
+        .card-green-overlay { background: linear-gradient(135deg, rgba(4, 120, 87, 0.9), rgba(6, 78, 59, 0.95)); }
+        .card-gold-overlay { background: linear-gradient(135deg, rgba(180, 83, 9, 0.9), rgba(120, 53, 15, 0.95)); }
+        .card-olive-overlay { background: linear-gradient(135deg, rgba(63, 98, 18, 0.9), rgba(20, 83, 45, 0.95)); }
+        .card-teal-overlay { background: linear-gradient(135deg, rgba(15, 118, 110, 0.9), rgba(30, 41, 59, 0.95)); }
+        
+        .hidden-item { display: none !important; }
+    </style>
+</head>
+<body class="relative overflow-x-hidden antialiased">
+    
+    <!-- Subtle Background Blobs -->
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="blob blob-4"></div>
+
+    <!-- Sticky Navigation -->
+    <nav class="fixed w-full z-50 glass-nav py-5">
+        <div class="max-w-7xl mx-auto px-8 flex justify-between items-center">
+            <a href="#" class="brand-font text-3xl font-bold text-emerald-900 tracking-wide">Aapno Farm</a>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-10 text-stone-700 font-bold tracking-widest text-xs uppercase">
+                <a href="#home" class="hover:text-emerald-700 transition-colors">Home</a>
+                <a href="#about" class="hover:text-emerald-700 transition-colors">About Us</a>
+                <a href="#products" class="hover:text-amber-700 transition-colors">Products</a>
+                <a href="#gallery" class="hover:text-emerald-700 transition-colors">Gallery</a>
+                <a href="#contact" class="hover:text-emerald-700 transition-colors">Contact</a>
+            </div>
+
+            <!-- Mobile Menu Icon -->
+            <button class="md:hidden text-emerald-900 text-2xl">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="home" class="hero-bg min-h-screen flex items-center justify-center text-center px-4 pt-32 pb-20">
+        <video class="hero-video" src="WhatsApp Video 2026-04-05 at 5.00.35 PM.mp4" autoplay loop muted playsinline></video>
+        <div class="hero-overlay"></div>
+        
+        <div class="relative z-10 max-w-6xl mx-auto flex flex-col items-center mt-12">
+            <!-- Increased formal welcome text size -->
+            <h2 class="text-lg md:text-2xl text-emerald-100 uppercase tracking-[0.4em] mb-6 font-semibold drop-shadow-md">Welcome To</h2>
+            
+            <!-- Increased formal header size for better visibility -->
+            <h1 class="brand-font text-7xl sm:text-8xl md:text-[7rem] lg:text-[9rem] font-bold text-white mb-6 tracking-tight leading-tight drop-shadow-2xl italic pb-4">Aapno Farm</h1>
+            
+            <hr class="w-32 border-t border-emerald-500 mb-10 opacity-70">
+
+            <p class="text-xl md:text-3xl text-stone-50 font-light mb-14 max-w-4xl leading-relaxed drop-shadow-lg">
+                The Gold Standard of Premium Organic Fruits & Vegetables.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 mt-4">
+                <a href="#products" class="btn-gradient">
+                    Explore Offerings
+                </a>
+                <a href="#gallery" class="btn-outline-glow">
+                    Visual Archive
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 px-8 relative">
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+            
+            <div class="elegant-card p-12 lg:p-16 relative z-10">
+                <span class="inline-block border-b border-emerald-800 text-emerald-900 font-bold tracking-widest text-xs mb-6 uppercase pb-1">Our Philosophy</span>
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-stone-900 brand-font leading-tight">
+                    Beyond Organic.<br>We Grow for Life.
+                </h2>
+                <p class="text-lg text-stone-600 leading-relaxed font-normal mb-8">
+                    At Aapno Farm, we believe the modern food system fundamentally compromises quality for scale. Our mission is to show you exactly where your fresh produce comes from. We guarantee pure, nutrient-rich fruits and vegetables cultivated directly from untouched earth.
+                </p>
+                
+                <div class="grid grid-cols-2 gap-8 mt-10 border-t border-stone-200 pt-10">
+                    <div>
+                        <h4 class="text-4xl text-emerald-800 font-bold mb-2 brand-font">100%</h4>
+                        <p class="font-bold text-stone-500 text-sm uppercase tracking-widest">Chemical Free</p>
+                    </div>
+                    <div>
+                        <h4 class="text-4xl text-amber-700 font-bold mb-2 brand-font">Zero</h4>
+                        <p class="font-bold text-stone-500 text-sm uppercase tracking-widest">Nutrient Loss</p>
+                    </div>
+                </div>
+
+                <div class="mt-12 pt-8 border-t border-stone-200">
+                    <h3 class="text-xl font-bold mb-4 text-stone-900 brand-font">Our Trusted Partners</h3>
+                    <p class="text-stone-600 mb-6 font-normal text-sm leading-relaxed max-w-md">We collaborate exclusively with leading organic grocers and wellness experts who enforce uncompromising standards for purity and crop quality.</p>
+                    <div class="flex flex-wrap gap-4 items-center">
+                        <div class="bg-white text-stone-800 px-5 py-2 border border-stone-200 font-semibold tracking-widest text-xs uppercase">Nature's Basket</div>
+                        <div class="bg-white text-stone-800 px-5 py-2 border border-stone-200 font-semibold tracking-widest text-xs uppercase">Organic India</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative w-full h-[650px] overflow-hidden rounded-sm shadow-xl z-10 group">
+                <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Authentic Farm Field Growing Vegetables" class="w-full h-full object-cover transition duration-1000 group-hover:scale-105">
+                <div class="absolute inset-0 bg-gradient-to-t from-emerald-900/60 to-transparent"></div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FORMAL PRODUCTS SECTION (Using Greens, Golds, and Slate) -->
+    <section id="products" class="py-24 px-4 md:px-8 bg-white relative z-10 border-y border-stone-200">
+        <div class="max-w-6xl mx-auto">
+            
+            <!-- Products Header -->
+            <div class="text-center mb-16">
+                <span class="text-emerald-800 font-bold uppercase tracking-widest text-xs mb-4 block">Offerings</span>
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-stone-900 brand-font mt-2">Farm Fresh Goodness</h2>
+                <hr class="w-16 border-t border-amber-600 mx-auto mb-6 opacity-80">
+                <p class="text-lg text-stone-500 font-normal max-w-2xl mx-auto mt-4">Discover our premium range of organic products, each carefully selected and delivered fresh to ensure maximum nutrition and taste.</p>
+            </div>
+
+            <!-- Top Grid: Current Products -->
+            <div class="grid md:grid-cols-2 gap-6 mb-20">
+                
+                <!-- Card 1: Fresh Vegetables -->
+                <div class="relative overflow-hidden rounded-sm p-8 md:p-10 text-white group flex flex-col justify-between shadow-lg h-[450px]">
+                    <img src="https://images.unsplash.com/photo-1566385101042-1a0aa0c1268c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-1000 group-hover:scale-105" alt="Assorted Fresh Vegetables">
+                    <div class="absolute inset-0 card-green-overlay z-10 transition-opacity duration-500 group-hover:opacity-90"></div>
+                    
+                    <div class="relative z-20">
+                        <div class="w-12 h-12 border border-white/40 flex items-center justify-center text-xl mb-6 bg-white/10 backdrop-blur-sm rounded-sm">
+                            <i class="fas fa-leaf text-white"></i>
+                        </div>
+                        <h3 class="text-3xl font-bold mb-3 text-white brand-font tracking-wide">Fresh Vegetables</h3>
+                        <p class="text-sm font-normal text-white/90 mb-8">Handpicked daily from our organic farms</p>
+                        
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="px-3 py-2 border border-white/30 bg-white/10 backdrop-blur-md text-xs font-semibold text-white truncate rounded-sm">Tomatoes</div>
+                            <div class="px-3 py-2 border border-white/30 bg-white/10 backdrop-blur-md text-xs font-semibold text-white truncate rounded-sm">Leafy Greens</div>
+                            <div class="px-3 py-2 border border-white/30 bg-white/10 backdrop-blur-md text-xs font-semibold text-white truncate rounded-sm">Carrots</div>
+                            <div class="px-3 py-2 border border-white/30 bg-white/10 backdrop-blur-md text-xs font-semibold text-white truncate rounded-sm">Bell Peppers</div>
+                        </div>
+                    </div>
+                    
+                    <div class="relative z-20 mt-8">
+                        <button onclick="openModal('vegetables')" class="font-bold text-xs tracking-widest text-white hover:text-green-100 transition-colors flex items-center uppercase pb-1 border-b border-transparent hover:border-green-100 w-max">View All <i class="fas fa-arrow-right ml-2 text-xs"></i></button>
+                    </div>
+                </div>
+
+                <!-- Card 2: Organic Fruits (Using Elegant Gold Overlay) -->
+                <div class="relative overflow-hidden rounded-sm p-8 md:p-10 text-white group flex flex-col justify-between shadow-lg h-[450px]">
+                    <img src="https://images.unsplash.com/photo-1573246123716-6b1782bfc499?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-1000 group-hover:scale-105" alt="Beautiful Apples and Oranges">
+                    <div class="absolute inset-0 card-gold-overlay z-10 transition-opacity duration-500 group-hover:opacity-90"></div>
+                    
+                    <div class="relative z-20">
+                        <div class="w-12 h-12 border border-white/40 flex items-center justify-center text-xl mb-6 bg-white/10 backdrop-blur-sm rounded-sm">
+                            <i class="fas fa-apple-alt text-white"></i>
+                        </div>
+                        <h3 class="text-3xl font-bold mb-3 text-white brand-font tracking-wide">Organic Fruits</h3>
+                        <p class="text-sm font-normal text-white/90 mb-8">Sweet, naturally ripened seasonal fruits</p>
+                        
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="px-3 py-2 border border-white/30 bg-white/10 backdrop-blur-md text-xs font-semibold text-white truncate rounded-sm">Apples</div>
+                            <div class="px-3 py-2 border border-white/30 bg-white/10 backdrop-blur-md text-xs font-semibold text-white truncate rounded-sm">Oranges</div>
+                            <div class="px-3 py-2 border border-white/30 bg-white/10 backdrop-blur-md text-xs font-semibold text-white truncate rounded-sm">Seasonal Fruits</div>
+                            <div class="px-3 py-2 border border-white/30 bg-white/10 backdrop-blur-md text-xs font-semibold text-white truncate rounded-sm">Berries</div>
+                        </div>
+                    </div>
+                    
+                    <div class="relative z-20 mt-8">
+                        <button onclick="openModal('fruits')" class="font-bold text-xs tracking-widest text-white hover:text-amber-100 transition-colors flex items-center uppercase pb-1 border-b border-transparent hover:border-amber-100 w-max">View All <i class="fas fa-arrow-right ml-2 text-xs"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Grid: Upcoming Products -->
+            <div class="text-center mb-16 mt-20 border-t border-stone-200 pt-16">
+                <span class="text-stone-500 font-bold uppercase tracking-widest text-xs mb-4 block">Future Expansions</span>
+                <h3 class="text-3xl md:text-4xl font-bold brand-font text-stone-900 mt-2">Upcoming Lines</h3>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 mb-20">
+                
+                <!-- Card 3: Cold-Pressed Oils (Olive Overlay) -->
+                <div class="relative overflow-hidden rounded-sm p-8 md:p-10 text-white group flex flex-col justify-between shadow-lg h-[450px]">
+                    <img src="https://images.unsplash.com/photo-1474128670149-7082a8d370ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-1000 group-hover:scale-105 grayscale-[30%]" alt="Oils">
+                    <div class="absolute inset-0 card-olive-overlay z-10"></div>
+                    
+                    <div class="relative z-20">
+                        <div class="absolute top-0 right-0 bg-transparent border border-white/50 text-white text-[10px] uppercase font-bold tracking-widest px-4 py-2 rounded-sm backdrop-blur-sm">In Development</div>
+                        
+                        <div class="w-12 h-12 border border-white/40 flex items-center justify-center text-xl mb-6 bg-white/10 backdrop-blur-sm rounded-sm">
+                            <i class="fas fa-tint text-white"></i>
+                        </div>
+                        <h3 class="text-3xl font-bold mb-3 text-white brand-font tracking-wide">Cold-Pressed Oils</h3>
+                        <p class="text-sm font-normal text-white/80 mb-8">Pure, traditional ancestral methods</p>
+                        
+                        <div class="grid grid-cols-2 gap-3 opacity-80">
+                            <div class="px-3 py-2 border border-white/30 bg-white/5 backdrop-blur-md text-xs font-semibold text-white truncate rounded-sm">Mustard Oil</div>
+                            <div class="px-3 py-2 border border-white/30 bg-white/5 backdrop-blur-md text-xs font-semibold text-white truncate rounded-sm">Coconut Oil</div>
+                            <div class="px-3 py-2 border border-white/30 bg-white/5 backdrop-blur-md text-xs font-semibold text-white truncate rounded-sm">Sesame Oil</div>
+                            <div class="px-3 py-2 border border-white/30 bg-white/5 backdrop-blur-md text-xs font-semibold text-white truncate rounded-sm">Groundnut Oil</div>
+                        </div>
+                    </div>
+                    
+                    <div class="relative z-20 mt-8">
+                        <button onclick="openModal('oils')" class="font-bold text-xs tracking-widest text-white hover:text-stone-200 transition-colors flex items-center uppercase pb-1 border-b border-transparent hover:border-stone-200 w-max">View All <i class="fas fa-arrow-right ml-2 text-xs"></i></button>
+                    </div>
+                </div>
+
+                <!-- Card 4: Dairy Products (Slate/Teal Overlay) -->
+                <div class="relative overflow-hidden rounded-sm p-8 md:p-10 text-white group flex flex-col justify-between shadow-lg h-[450px]">
+                    <img src="https://images.unsplash.com/photo-1628088062854-d1870b4553da?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-1000 group-hover:scale-105 grayscale-[30%]" alt="Dairy">
+                    <div class="absolute inset-0 card-teal-overlay z-10"></div>
+                    
+                    <div class="relative z-20">
+                        <div class="absolute top-0 right-0 bg-transparent border border-white/50 text-white text-[10px] uppercase font-bold tracking-widest px-4 py-2 rounded-sm backdrop-blur-sm">In Planning</div>
+                        
+                        <div class="w-12 h-12 border border-white/40 flex items-center justify-center text-xl mb-6 bg-white/10 backdrop-blur-sm rounded-sm">
+                            <i class="fas fa-wine-bottle text-white"></i>
+                        </div>
+                        <h3 class="text-3xl font-bold mb-3 text-white brand-font tracking-wide">Dairy Products</h3>
+                        <p class="text-sm font-normal text-white/80 mb-8">Fresh, pure dairy from happy cows</p>
+                        
+                        <div class="grid grid-cols-2 gap-3 opacity-80">
+                            <div class="px-3 py-2 border border-white/30 bg-white/5 backdrop-blur-md text-xs font-semibold text-white truncate rounded-sm">Fresh Milk</div>
+                            <div class="px-3 py-2 border border-white/30 bg-white/5 backdrop-blur-md text-xs font-semibold text-white truncate rounded-sm">Ghee</div>
+                            <div class="px-3 py-2 border border-white/30 bg-white/5 backdrop-blur-md text-xs font-semibold text-white truncate rounded-sm">Paneer</div>
+                            <div class="px-3 py-2 border border-white/30 bg-white/5 backdrop-blur-md text-xs font-semibold text-white truncate rounded-sm">Butter</div>
+                        </div>
+                    </div>
+                    
+                    <div class="relative z-20 mt-8">
+                        <button onclick="openModal('dairy')" class="font-bold text-xs tracking-widest text-white hover:text-stone-200 transition-colors flex items-center uppercase pb-1 border-b border-transparent hover:border-stone-200 w-max">View All <i class="fas fa-arrow-right ml-2 text-xs"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Also Available Section -->
+            <div class="bg-white rounded-sm p-10 mt-16 border border-stone-200 shadow-sm relative overflow-hidden">
+                <h3 class="text-2xl font-bold text-center mb-8 text-stone-900 brand-font relative z-10">Also Providing</h3>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 relative z-10">
+                    <div class="bg-stone-50 rounded-sm p-6 border border-stone-100 flex flex-col items-center text-center">
+                        <i class="fas fa-jar text-emerald-800 text-2xl mb-4"></i>
+                        <span class="text-sm font-bold text-stone-800 uppercase tracking-wider">Pickles & Chutneys</span>
+                    </div>
+                    <div class="bg-stone-50 rounded-sm p-6 border border-stone-100 flex flex-col items-center text-center">
+                        <i class="fas fa-seedling text-amber-700 text-2xl mb-4"></i>
+                        <span class="text-sm font-bold text-stone-800 uppercase tracking-wider">Pulses & Grains</span>
+                    </div>
+                    <div class="bg-stone-50 rounded-sm p-6 border border-stone-100 flex flex-col items-center text-center">
+                        <i class="fas fa-flask text-amber-600 text-2xl mb-4"></i>
+                        <span class="text-sm font-bold text-stone-800 uppercase tracking-wider">Honey & Jams</span>
+                    </div>
+                    <div class="bg-stone-50 rounded-sm p-6 border border-stone-100 flex flex-col items-center text-center">
+                        <i class="fas fa-leaf text-emerald-700 text-2xl mb-4"></i>
+                        <span class="text-sm font-bold text-stone-800 uppercase tracking-wider">Fresh Herbs</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Gallery Section (AT BOTTOM BEFORE FOOTER) -->
+    <section id="gallery" class="py-24 px-8 bg-stone-50 border-y border-stone-200">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-emerald-800 font-bold uppercase tracking-widest text-xs mb-4 block">Visual Archives</span>
+                <h2 class="text-4xl md:text-5xl font-bold brand-font text-stone-900 mb-6">Our Farm Unfiltered</h2>
+                <hr class="w-16 border-t border-emerald-800 mx-auto mb-6 opacity-80">
+                <p class="text-lg font-normal text-stone-500 max-w-2xl mx-auto">Browse our complete collection of authentic moments from our agricultural journey.</p>
+            </div>
+
+            <!-- Centralized Filter Tabs -->
+            <div class="flex flex-wrap justify-center gap-4 mb-16">
+                <button onclick="filterGallery(event, 'all')" class="filter-btn active focus:outline-none"><i class="fas fa-th-large mr-2"></i>Show All</button>
+                <button onclick="filterGallery(event, 'photo')" class="filter-btn focus:outline-none"><i class="fas fa-camera mr-2"></i>Photos</button>
+                <button onclick="filterGallery(event, 'video')" class="filter-btn focus:outline-none"><i class="fas fa-video mr-2"></i>Videos</button>
+            </div>
+
+            <!-- Dynamic Masonry Grid preserving FULL uncropped images/videos -->
+            <div class="masonry-gallery" id="gallery-container">
+                <!-- IMAGES -->
+                <div class="masonry-item photo-item"><img src="WhatsApp Image 2026-04-04 at 9.25.36 PM (1).jpeg" alt="Aapno Farm Image"></div>
+                <div class="masonry-item photo-item"><img src="WhatsApp Image 2026-04-04 at 9.25.36 PM.jpeg" alt="Aapno Farm Image"></div>
+                <div class="masonry-item photo-item"><img src="WhatsApp Image 2026-04-04 at 9.25.37 PM.jpeg" alt="Aapno Farm Image"></div>
+                <div class="masonry-item photo-item"><img src="WhatsApp Image 2026-04-04 at 9.31.23 PM.jpeg" alt="Aapno Farm Image"></div>
+                <div class="masonry-item photo-item"><img src="WhatsApp Image 2026-04-04 at 9.31.51 PM.jpeg" alt="Aapno Farm Image"></div>
+                <div class="masonry-item photo-item"><img src="WhatsApp Image 2026-04-04 at 9.31.52 PM.jpeg" alt="Aapno Farm Image"></div>
+                <div class="masonry-item photo-item"><img src="WhatsApp Image 2026-04-04 at 9.31.53 PM.jpeg" alt="Aapno Farm Image"></div>
+                <div class="masonry-item photo-item"><img src="WhatsApp Image 2026-04-04 at 9.31.54 PM (1).jpeg" alt="Aapno Farm Image"></div>
+                <div class="masonry-item photo-item"><img src="WhatsApp Image 2026-04-04 at 9.31.54 PM (2).jpeg" alt="Aapno Farm Image"></div>
+                <div class="masonry-item photo-item"><img src="WhatsApp Image 2026-04-04 at 9.31.54 PM.jpeg" alt="Aapno Farm Image"></div>
+
+                <!-- VIDEOS -->
+                <div class="masonry-item video-item"><video src="WhatsApp Video 2026-04-04 at 9.31.53 PM (1).mp4" autoplay loop muted playsinline controls></video></div>
+                <div class="masonry-item video-item"><video src="WhatsApp Video 2026-04-04 at 9.31.53 PM.mp4" autoplay loop muted playsinline controls></video></div>
+                <div class="masonry-item video-item"><video src="WhatsApp Video 2026-04-05 at 5.00.35 PM.mp4" autoplay loop muted playsinline controls></video></div>
+                <div class="masonry-item video-item"><video src="WhatsApp Video 2026-04-05 at 5.00.36 PM (1).mp4" autoplay loop muted playsinline controls></video></div>
+                <div class="masonry-item video-item"><video src="WhatsApp Video 2026-04-05 at 5.00.36 PM (2).mp4" autoplay loop muted playsinline controls></video></div>
+                <div class="masonry-item video-item"><video src="WhatsApp Video 2026-04-05 at 5.00.36 PM.mp4" autoplay loop muted playsinline controls></video></div>
+                <div class="masonry-item video-item"><video src="WhatsApp Video 2026-04-05 at 5.00.37 PM (1).mp4" autoplay loop muted playsinline controls></video></div>
+                <div class="masonry-item video-item"><video src="WhatsApp Video 2026-04-05 at 5.00.37 PM (2).mp4" autoplay loop muted playsinline controls></video></div>
+                <div class="masonry-item video-item"><video src="WhatsApp Video 2026-04-05 at 5.00.37 PM.mp4" autoplay loop muted playsinline controls></video></div>
+                <div class="masonry-item video-item"><video src="WhatsApp Video 2026-04-05 at 5.00.38 PM (1).mp4" autoplay loop muted playsinline controls></video></div>
+                <div class="masonry-item video-item"><video src="WhatsApp Video 2026-04-05 at 5.00.38 PM.mp4" autoplay loop muted playsinline controls></video></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / Contact -->
+    <footer id="contact" class="bg-emerald-950 text-white py-24 px-8 border-t-8 border-emerald-900 relative overflow-hidden">
+        
+        <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-16 relative z-10">
+            <div class="col-span-2 pr-10">
+                <h2 class="brand-font text-4xl font-bold mb-6 text-white uppercase tracking-widest">Aapno Farm</h2>
+                <p class="text-stone-300 text-md font-normal mb-10 max-w-sm leading-relaxed">The gold standard in premium organic fruits and vegetables, expanding soon to pure oils and authentic dairy products.</p>
+                <div class="flex space-x-6 text-xl">
+                    <a href="#" class="text-white hover:text-amber-500 transition"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/918854040503" class="text-white hover:text-emerald-500 transition"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" class="text-white hover:text-stone-400 transition"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            
+            <div>
+                <h4 class="text-xs font-bold mb-6 uppercase tracking-widest border-b border-emerald-800 pb-2 text-stone-400">Navigation</h4>
+                <ul class="space-y-4 text-stone-200 text-sm font-normal">
+                    <li><a href="#about" class="hover:text-white transition">Company Overview</a></li>
+                    <li><a href="#products" class="hover:text-white transition">Our Harvest Catalog</a></li>
+                    <li><a href="#gallery" class="hover:text-white transition">Media Archives</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="text-xs font-bold mb-6 uppercase tracking-widest border-b border-emerald-800 pb-2 text-stone-400">Inquiry</h4>
+                <ul class="space-y-4 text-stone-200 text-sm font-normal">
+                    <li class="flex items-start"><i class="fas fa-map-marker-alt mt-1 mr-4 opacity-70"></i> Rajasthan, India</li>
+                    <li class="flex items-center"><i class="fas fa-envelope mr-4 opacity-70"></i> <a href="mailto:ashud37@gmail.com" class="hover:text-white transition">ashud37@gmail.com</a></li>
+                    <li class="flex items-center"><i class="fas fa-phone mr-4 opacity-70"></i> <a href="tel:+918854040503" class="hover:text-white transition">+91 88540 40503</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto border-t border-emerald-900 mt-20 pt-8 flex flex-col md:flex-row justify-between text-xs font-bold tracking-widest text-emerald-700 uppercase">
+            <p>&copy; 2026 Aapno Farm. All rights reserved.</p>
+            <div class="space-x-4 mt-6 md:mt-0">
+                <a href="#" class="hover:text-white transition">Privacy Notice</a>
+                <span class="opacity-30">|</span>
+                <a href="#" class="hover:text-white transition">Terms of Use</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Dynamic Products Modal -->
+    <div id="product-modal" class="fixed inset-0 z-[100] hidden bg-stone-900/90 backdrop-blur-sm flex items-center justify-center p-4 md:p-8">
+        <div class="bg-white w-full max-w-5xl rounded-sm shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+            <div class="p-6 border-b border-stone-200 flex justify-between items-center bg-stone-50">
+                <h3 id="modal-title" class="text-3xl font-bold brand-font text-emerald-900">Category Name</h3>
+                <button onclick="closeModal()" class="text-stone-400 hover:text-emerald-800 text-2xl transition"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="p-6 overflow-y-auto">
+                <div id="modal-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                    <!-- Images injected securely via JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const productData = {
+            vegetables: {
+                title: "Fresh Vegetables Catalog",
+                images: [
+                    { url: "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=600&q=80", name: "Farm Tomatoes" },
+                    { url: "https://images.unsplash.com/photo-1622381362771-419b4862ba94?w=600&q=80", name: "Leafy Greens" },
+                    { url: "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=600&q=80", name: "Root Carrots" },
+                    { url: "https://images.unsplash.com/photo-1568227429188-4f81005a3ba0?w=600&q=80", name: "Bell Peppers" },
+                    { url: "https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=600&q=80", name: "Fresh Potatoes" },
+                    { url: "https://images.unsplash.com/photo-1604543519965-f938d22384cc?w=600&q=80", name: "Red Onions" },
+                    { url: "https://images.unsplash.com/photo-1459411621453-7b03977f4bfc?w=600&q=80", name: "Broccoli" },
+                    { url: "https://images.unsplash.com/photo-1568584711075-3d021a7c3ca3?w=600&q=80", name: "Cauliflower" },
+                    { url: "https://images.unsplash.com/photo-1518977822534-7049a61ee0c2?w=600&q=80", name: "Cabbage" },
+                    { url: "https://images.unsplash.com/photo-1540148426945-6cf21a64f8ad?w=600&q=80", name: "Garlic" },
+                    { url: "https://images.unsplash.com/photo-1615486171448-4cbab10292bf?w=600&q=80", name: "Eggplant" },
+                    { url: "https://images.unsplash.com/photo-1601625464169-7c852656fcde?w=600&q=80", name: "Zucchini" }
+                ]
+            },
+            fruits: {
+                title: "Organic Fruits Catalog",
+                images: [
+                    { url: "https://images.unsplash.com/photo-1560806887-1e4cd0b6fac6?w=600&q=80", name: "Crisp Apples" },
+                    { url: "https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=600&q=80", name: "Fresh Oranges" },
+                    { url: "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=600&q=80", name: "Bananas" },
+                    { url: "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=600&q=80", name: "Mixed Berries" },
+                    { url: "https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=600&q=80", name: "Pineapples" },
+                    { url: "https://images.unsplash.com/photo-1601493700631-2b16ec4b4716?w=600&q=80", name: "Mangoes" },
+                    { url: "https://images.unsplash.com/photo-1589733955941-5eeaf752f6dd?w=600&q=80", name: "Watermelon" },
+                    { url: "https://images.unsplash.com/photo-1601314152504-20a8dbdf0bc1?w=600&q=80", name: "Pomegranate" },
+                    { url: "https://images.unsplash.com/photo-1596363505729-41f7e47876eb?w=600&q=80", name: "Grapes" },
+                    { url: "https://images.unsplash.com/photo-1517282009859-f000ec3b26af?w=600&q=80", name: "Papaya" },
+                    { url: "https://images.unsplash.com/photo-1557800636-8ab3704051b6?w=600&q=80", name: "Sweet Lime" },
+                    { url: "https://images.unsplash.com/photo-1585238356972-04dbabfbeb43?w=600&q=80", name: "Kiwi" }
+                ]
+            },
+            oils: {
+                title: "Cold-Pressed Oils Pipeline",
+                images: [
+                    { url: "https://images.unsplash.com/photo-1474128670149-7082a8d370ea?w=600&q=80", name: "Mustard Oil" },
+                    { url: "https://images.unsplash.com/photo-1508061253366-f7da158b6d46?w=600&q=80", name: "Almond Oil" },
+                    { url: "https://images.unsplash.com/photo-1510815147879-1e3c8369cded?w=600&q=80", name: "Sesame Oil" },
+                    { url: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=600&q=80", name: "Sunflower Oil" },
+                    { url: "https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?w=600&q=80", name: "Avocado Oil" },
+                    { url: "https://images.unsplash.com/photo-1620027781302-39c2c62c2f0f?w=600&q=80", name: "Coconut Oil" },
+                    { url: "https://images.unsplash.com/photo-1596131454556-91e70e9a184e?w=600&q=80", name: "Flaxseed Oil" },
+                    { url: "https://images.unsplash.com/photo-1608681282110-86c31bfad774?w=600&q=80", name: "Neem Oil" }
+                ]
+            },
+            dairy: {
+                title: "Dairy Products Pipeline",
+                images: [
+                    { url: "https://images.unsplash.com/photo-1563636619-e9143da7973b?w=600&q=80", name: "Fresh Milk" },
+                    { url: "https://images.unsplash.com/photo-1628088062854-d1870b4553da?w=600&q=80", name: "Pure Ghee" },
+                    { url: "https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?w=600&q=80", name: "Farm Butter" },
+                    { url: "https://images.unsplash.com/photo-1528716335967-df50bf22944b?w=600&q=80", name: "Paneer" },
+                    { url: "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=600&q=80", name: "Farm Curd" },
+                    { url: "https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?w=600&q=80", name: "Aged Cheese" },
+                    { url: "https://images.unsplash.com/photo-1550583724-b2692b85b150?w=600&q=80", name: "Heavy Cream" },
+                    { url: "https://images.unsplash.com/photo-1598514982635-f481fcceb557?w=600&q=80", name: "Buttermilk" }
+                ]
+            }
+        };
+
+        function openModal(category) {
+            const modal = document.getElementById('product-modal');
+            const title = document.getElementById('modal-title');
+            const grid = document.getElementById('modal-grid');
+            
+            const data = productData[category];
+            if(!data) return;
+
+            title.textContent = data.title;
+            grid.innerHTML = data.images.map(img => `
+                <div class="group relative overflow-hidden rounded-sm shadow-md h-56 border border-stone-200">
+                    <img src="${img.url}" alt="${img.name}" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                    <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-stone-900/90 to-transparent p-4 pt-16">
+                        <h4 class="text-white font-bold tracking-widest text-sm uppercase">${img.name}</h4>
+                    </div>
+                </div>
+            `).join('');
+
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // prevent scrolling behind
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('product-modal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto'; // allow scrolling again
+        }
+        
+        // Ensure closing modal when clicking on the dark backdrop outside the white modal box
+        document.getElementById('product-modal').addEventListener('click', function(e) {
+            if(e.target === this) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
